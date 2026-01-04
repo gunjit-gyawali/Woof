@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woof - Dog Guesser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <div class="container">
+
+        <div id="landing-page" class="card">
+            <div class="logo">
+                <h1>Woof - Dog Guesser</h1>
+            </div>
+            <p class="subtitle">I will guess your dog's breed through fun quiz!</p>
+            <div class="input-group">
+                <label for="dog-name">What's your dog's name?</label>
+                <input type="text" id="dog-name" placeholder="Enter your dog's name" autocomplete="off">
+            </div>
+            <button class="btn btn-primary" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <div id="quiz-page" class="card hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p class="progress-text" id="progress-text">Question 1 of 15</p>
+
+            <div id="question-container"></div>
+
+            <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next Question →</button>
+        </div>
+
+        <div id="results-page" class="card hidden">
+            <div class="result-header">
+                <h2 class="result-title">I think <span id="dog-name-result"></span> is a<br><span class="breed-name" id="breed-result"></span>! </h2>
+
+                <span class="confidence" id="confidence-result">95% Match</span>
+            </div>
+
+            <div class="breed-description" id="breed-description"></div>
+
+            <div class="breed-traits" id="breed-traits"></div>
+
+            <div class="alternatives">
+                <h3 class="alternatives-title">Other Possible Matches</h3>
+                <div id="alternatives-container"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="restartQuiz()">Take Quiz Again</button>
+            </div>
+        </div>
+     </div>
+
+     <script src="script.js"></script>
+</body>
+</html>
