@@ -2,10 +2,11 @@
 
 Woof is an interactive web application that guesses your dog’s breed based on a fun quiz. By answering questions about your dog’s size, coat, behavior, and personality traits, the app calculates the most likely breed and shows additional possible matches.
 
-**Demo**
-You can use at it live at  **https://gunjit-gyawali.github.io/Woof/**
+**Demo** - 
+You can use it live at  **https://gunjit-gyawali.github.io/Woof/**
 
 **Features**
+
 Interactive quiz with 15 questions covering physical traits and behavior.
 Real-time progress bar showing quiz completion.
 Breed matching algorithm calculates top 3 probable breeds.
@@ -14,6 +15,7 @@ Mobile-friendly and responsive design.
 Ability to restart the quiz without refreshing the page.
 
 **Technologies Used**
+
 HTML5 – Structure of the quiz pages.
 CSS – Modern responsive styling with animations.
 JavaScript – Handles quiz logic, scoring, and result display.
@@ -43,6 +45,7 @@ Users can restart the quiz to try again.
 └─ README.md        # Project documentation
 
 **Usage**
+
 Clone or download the repository.
 Open index.html in a web browser.
 Enter your dog’s name.
@@ -51,13 +54,16 @@ View the predicted breed and alternative matches.
 Click “Take Quiz Again” to restart.
 
 **Customization**
+
 Add more dog breeds to the breeds object in script.js.
 Adjust or add quiz questions in the questions array.
 Modify colors and animations in styles.css to match your theme.
 
 **Credits**
+
 Inspired by online breed quizzes.
 Created as a fun pet project using vanilla HTML, CSS, and JavaScript.
 
 **License**
+
 This project is open-source and available for personal and educational use.
