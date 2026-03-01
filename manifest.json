@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Woof - Dog Guesser",
+    "version": "1.0",
+    "description": "Guess your dog's breed through a fun quiz.",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Woof - Dog Guesser",
+        "default_icon": {
+            "16": "icon16.png"
+        }
+    }
+}

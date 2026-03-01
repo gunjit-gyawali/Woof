@@ -1,8 +1,8 @@
-let dogName = '';
-let currentQuestion = 0;
-let answers = {};
+var dogName = '';
+var currentQ = 0;
+var answers = {};
 
-const questions = [
+var questions = [
     {
         id: 'size',
         question: 'How big is your dog?',
@@ -15,7 +15,7 @@ const questions = [
     },
     {
         id: 'body_build',
-        question: 'How would you describe your dog\'s body build?',
+        question: "How would you describe your dog's body build?",
         options: [
             { text: 'Compact and muscular', value: 'muscular', traits: { build: 'muscular' } },
             { text: 'Lean and athletic', value: 'athletic', traits: { build: 'athletic' } },
@@ -45,7 +45,7 @@ const questions = [
     },
     {
         id: 'muzzle',
-        question: 'What does your dog\'s face look like?',
+        question: "What does your dog's face look like?",
         options: [
             { text: 'Long snout/muzzle', value: 'long', traits: { muzzle: 'long' } },
             { text: 'Medium-length snout', value: 'medium', traits: { muzzle: 'medium' } },
@@ -53,19 +53,19 @@ const questions = [
             { text: 'Square or broad muzzle', value: 'square', traits: { muzzle: 'square' } }
         ]
     },
-        {
+    {
         id: 'ears',
-        question: 'Describe your dog\'s ears:',
+        question: "Describe your dog's ears:",
         options: [
             { text: 'Floppy and long', value: 'floppy', traits: { ears: 'floppy' } },
             { text: 'Pointed and upright', value: 'pointed', traits: { ears: 'pointed' } },
             { text: 'Semi-erect (fold over)', value: 'semi', traits: { ears: 'semi' } },
             { text: 'Small and close to head', value: 'small', traits: { ears: 'small' } }
-    ]
+        ]
     },
     {
         id: 'energy',
-        question: 'What\'s your dog\'s energy level?',
+        question: "What's your dog's energy level?",
         options: [
             { text: 'Low - prefers lounging', value: 'low', traits: { energy: 'low' } },
             { text: 'Moderate - balanced activity', value: 'moderate', traits: { energy: 'moderate' } },
@@ -155,7 +155,7 @@ const questions = [
     }
 ];
 
-const breeds = {
+var breeds = {
     'Golden Retriever': {
         traits: {
             size: ['large'],
@@ -179,6 +179,7 @@ const breeds = {
         temperament: 'Friendly & Devoted',
         energy: 'High'
     },
+
     'Labrador Retriever': {
         traits: {
             size: ['large'],
@@ -195,363 +196,306 @@ const breeds = {
             trainability: ['high'],
             prey_drive: ['moderate'],
             behavior: ['companion', 'hunting'],
-            affection: ['very_high']
+            affection: ['very_high', 'high']
         },
-        description: 'Labs are outgoing, even-tempered, and active companions. They are excellent family dogs, love water, and are known for their friendliness and trainability.',
+        description: 'Labs are outgoing, energetic, and endlessly friendly. They are one of the most popular breeds in the world for a reason - great with families, easy to train, and always happy.',
         size: 'Large',
-        temperament: 'Outgoing & Active',
-        energy: 'Very High'
+        temperament: 'Outgoing & Friendly',
+        energy: 'High'
     },
+
     'German Shepherd': {
         traits: {
             size: ['large'],
             build: ['athletic', 'muscular'],
-            coat: ['medium'],
-            color: ['dark', 'multi'],
-            muzzle: ['long', 'medium'],
+            coat: ['medium', 'long'],
+            color: ['dark', 'golden', 'multi'],
+            muzzle: ['long'],
             ears: ['pointed'],
             energy: ['high', 'very_high'],
             exercise: ['high', 'very_high'],
             vocal: ['frequent', 'moderate'],
-            social: ['protective', 'cautious'],
-            family_friendly: ['good', 'excellent'],
+            social: ['cautious', 'reserved'],
+            family_friendly: ['good'],
             trainability: ['high'],
-            prey_drive: ['moderate', 'high'],
+            prey_drive: ['high', 'moderate'],
             behavior: ['guarding', 'herding'],
             affection: ['high', 'moderate']
         },
-        description: 'German Shepherds are confident, courageous, and intelligent working dogs. They are loyal protectors, highly trainable, and excel in police and military work.',
+        description: 'German Shepherds are confident, courageous, and smart. They are incredibly versatile - used as police dogs, service animals, and loyal family protectors.',
         size: 'Large',
-        temperament: 'Loyal & Protective',
-        energy: 'Very High'
+        temperament: 'Confident & Loyal',
+        energy: 'High'
     },
-    'Beagle': {
-        traits: {
-            size: ['small', 'medium'],
-            build: ['muscular', 'stocky'],
-            coat: ['short'],
-            color: ['multi'],
-            muzzle: ['medium'],
-            ears: ['floppy'],
-            energy: ['moderate', 'high'],
-            exercise: ['moderate', 'high'],
-            vocal: ['very_vocal', 'frequent'],
-            social: ['friendly'],
-            family_friendly: ['excellent', 'good'],
-            trainability: ['moderate'],
-            prey_drive: ['high'],
-            behavior: ['hunting'],
-            affection: ['high']
-        },
-        description: 'Beagles are merry, friendly hounds with excellent noses. They are curious, love to follow scents, and are great family dogs with a playful nature.',
-        size: 'Small-Medium',
-        temperament: 'Merry & Curious',
-        energy: 'Moderate'
-    },
-    'Bulldog': {
-        traits: {
-            size: ['medium'],
-            build: ['stocky', 'muscular'],
-            coat: ['short'],
-            color: ['light', 'multi'],
-            muzzle: ['flat'],
-            ears: ['small'],
-            energy: ['low'],
-            exercise: ['minimal', 'moderate'],
-            vocal: ['quiet', 'moderate'],
-            social: ['friendly', 'cautious'],
-            family_friendly: ['excellent'],
-            trainability: ['moderate', 'low'],
-            prey_drive: ['low'],
-            behavior: ['companion'],
-            affection: ['high', 'very_high']
-        },
-        description: 'Bulldogs are calm, courageous, and friendly companions. Despite their tough appearance, they are gentle, affectionate, and great with children.',
-        size: 'Medium',
-        temperament: 'Calm & Friendly',
-        energy: 'Low'
-    },
-    'Poodle': {
-        traits: {
-            size: ['small', 'medium', 'large'],
-            build: ['athletic'],
-            coat: ['curly'],
-            color: ['dark', 'light', 'golden'],
-            muzzle: ['medium', 'long'],
-            ears: ['floppy'],
-            energy: ['high', 'moderate'],
-            exercise: ['moderate', 'high'],
-            vocal: ['moderate'],
-            social: ['friendly', 'cautious'],
-            family_friendly: ['excellent', 'good'],
-            trainability: ['high'],
-            prey_drive: ['moderate'],
-            behavior: ['companion'],
-            affection: ['high']
-        },
-        description: 'Poodles are exceptionally intelligent, active, and elegant dogs. They are hypoallergenic, highly trainable, and come in three sizes: toy, miniature, and standard.',
-        size: 'Varies',
-        temperament: 'Smart & Elegant',
-        energy: 'Moderate-High'
-    },
-    'Chihuahua': {
+
+    'French Bulldog': {
         traits: {
             size: ['small'],
-            build: ['stocky'],
-            coat: ['short', 'long'],
-            color: ['golden', 'dark', 'light', 'multi'],
-            muzzle: ['medium'],
-            ears: ['pointed', 'semi'],
-            energy: ['moderate', 'high'],
+            build: ['muscular', 'stocky'],
+            coat: ['short'],
+            color: ['multi', 'dark', 'light'],
+            muzzle: ['flat'],
+            ears: ['pointed'],
+            energy: ['low', 'moderate'],
             exercise: ['minimal', 'moderate'],
-            vocal: ['very_vocal', 'frequent'],
-            social: ['cautious', 'protective'],
-            family_friendly: ['okay', 'limited'],
+            vocal: ['moderate', 'frequent'],
+            social: ['friendly', 'cautious'],
+            family_friendly: ['excellent', 'good'],
             trainability: ['moderate'],
             prey_drive: ['low'],
             behavior: ['companion'],
-            affection: ['very_high']
+            affection: ['very_high', 'high']
         },
-        description: 'Chihuahuas are tiny but mighty, with big personalities. They are loyal, charming, and often bond closely with one person. Despite their size, they are bold and confident.',
-        size: 'Tiny',
-        temperament: 'Bold & Loyal',
-        energy: 'Moderate'
+        description: 'French Bulldogs are charming, adaptable, and totally people-oriented. They do not need a lot of exercise and are perfect for apartment living.',
+        size: 'Small',
+        temperament: 'Charming & Adaptable',
+        energy: 'Low'
     },
-    'Siberian Husky': {
-        traits: {
-            size: ['large'],
-            build: ['athletic'],
-            coat: ['long', 'medium'],
-            color: ['multi', 'dark', 'light'],
-            muzzle: ['medium'],
-            ears: ['pointed'],
-            energy: ['very_high'],
-            exercise: ['very_high'],
-            vocal: ['very_vocal'],
-            social: ['friendly'],
-            family_friendly: ['good'],
-            trainability: ['moderate', 'low'],
-            prey_drive: ['high'],
-            behavior: ['companion'],
-            affection: ['moderate']
-        },
-        description: 'Huskies are energetic, outgoing, and mischievous. Originally bred for sledding, they have incredible stamina and love to run. They are known for their striking appearance and vocal nature.',
-        size: 'Large',
-        temperament: 'Energetic & Outgoing',
-        energy: 'Very High'
-    },
+
     'Border Collie': {
         traits: {
             size: ['medium'],
             build: ['athletic'],
             coat: ['medium', 'long'],
             color: ['multi', 'dark'],
-            muzzle: ['medium'],
+            muzzle: ['medium', 'long'],
             ears: ['semi', 'pointed'],
-            energy: ['very_high'],
-            exercise: ['very_high'],
+            energy: ['very_high', 'high'],
+            exercise: ['very_high', 'high'],
             vocal: ['moderate', 'frequent'],
             social: ['cautious', 'friendly'],
             family_friendly: ['good'],
             trainability: ['high'],
-            prey_drive: ['high'],
+            prey_drive: ['high', 'moderate'],
             behavior: ['herding'],
-            affection: ['high']
+            affection: ['high', 'moderate']
         },
-        description: 'Border Collies are workaholics with incredible intelligence and energy. They excel at herding, agility, and obedience. They need mental and physical stimulation.',
+        description: 'Border Collies are widely considered the most intelligent dog breed. They have an intense work drive and need a lot of mental and physical stimulation to stay happy.',
         size: 'Medium',
-        temperament: 'Intelligent & Energetic',
+        temperament: 'Intelligent & Intense',
         energy: 'Very High'
     },
+
+    'Poodle': {
+        traits: {
+            size: ['medium', 'small', 'large'],
+            build: ['athletic'],
+            coat: ['curly'],
+            color: ['light', 'dark', 'golden'],
+            muzzle: ['long'],
+            ears: ['floppy'],
+            energy: ['high', 'moderate'],
+            exercise: ['high', 'moderate'],
+            vocal: ['moderate'],
+            social: ['friendly', 'cautious'],
+            family_friendly: ['excellent'],
+            trainability: ['high'],
+            prey_drive: ['moderate', 'low'],
+            behavior: ['companion'],
+            affection: ['high', 'very_high']
+        },
+        description: 'Poodles are incredibly smart, athletic, and elegant. Despite the fancy haircuts they are often seen with, they were originally bred as water retrievers and love to stay active.',
+        size: 'Medium',
+        temperament: 'Smart & Elegant',
+        energy: 'High'
+    },
+
+    'Beagle': {
+        traits: {
+            size: ['small', 'medium'],
+            build: ['stocky', 'athletic'],
+            coat: ['short'],
+            color: ['multi', 'golden'],
+            muzzle: ['medium'],
+            ears: ['floppy'],
+            energy: ['high', 'moderate'],
+            exercise: ['high', 'moderate'],
+            vocal: ['very_vocal', 'frequent'],
+            social: ['friendly'],
+            family_friendly: ['excellent'],
+            trainability: ['moderate'],
+            prey_drive: ['high', 'moderate'],
+            behavior: ['hunting'],
+            affection: ['high', 'very_high']
+        },
+        description: 'Beagles are merry, curious, and friendly. They have an excellent nose and a loud howl, originally bred for hunting in packs. They love people and are great with kids.',
+        size: 'Small-Medium',
+        temperament: 'Merry & Curious',
+        energy: 'High'
+    },
+
+    'Husky': {
+        traits: {
+            size: ['large', 'medium'],
+            build: ['athletic'],
+            coat: ['medium', 'long'],
+            color: ['multi', 'light', 'dark'],
+            muzzle: ['medium'],
+            ears: ['pointed'],
+            energy: ['very_high', 'high'],
+            exercise: ['very_high', 'high'],
+            vocal: ['very_vocal', 'frequent'],
+            social: ['friendly'],
+            family_friendly: ['good', 'excellent'],
+            trainability: ['moderate'],
+            prey_drive: ['high'],
+            behavior: ['hunting', 'companion'],
+            affection: ['high', 'moderate']
+        },
+        description: 'Huskies are energetic, mischievous, and love to talk. Originally sled dogs from Siberia, they need lots of exercise and are known for their striking appearance and loud vocalizations.',
+        size: 'Large',
+        temperament: 'Energetic & Vocal',
+        energy: 'Very High'
+    },
+
     'Dachshund': {
         traits: {
             size: ['small'],
             build: ['long_low'],
-            coat: ['short', 'long'],
+            coat: ['short', 'long', 'medium'],
             color: ['dark', 'golden', 'multi'],
             muzzle: ['long'],
             ears: ['floppy'],
-            energy: ['moderate'],
-            exercise: ['moderate'],
-            vocal: ['frequent'],
-            social: ['cautious', 'friendly'],
-            family_friendly: ['good', 'okay'],
-            trainability: ['moderate'],
-            prey_drive: ['high'],
-            behavior: ['hunting'],
-            affection: ['high']
-        },
-        description: 'Dachshunds are clever, lively, and courageous. Their long bodies and short legs make them distinctive. They were bred to hunt badgers and have a bold personality.',
-        size: 'Small',
-        temperament: 'Clever & Courageous',
-        energy: 'Moderate'
-    },
-    'Yorkshire Terrier': {
-        traits: {
-            size: ['small'],
-            build: ['stocky'],
-            coat: ['long'],
-            color: ['golden', 'multi', 'dark'],
-            muzzle: ['medium'],
-            ears: ['pointed', 'small'],
             energy: ['moderate', 'high'],
-            exercise: ['minimal', 'moderate'],
+            exercise: ['moderate', 'minimal'],
             vocal: ['frequent', 'very_vocal'],
-            social: ['cautious'],
-            family_friendly: ['okay', 'limited'],
-            trainability: ['moderate'],
-            prey_drive: ['moderate'],
-            behavior: ['companion'],
-            affection: ['very_high']
-        },
-        description: 'Yorkies are feisty, affectionate, and make excellent apartment dogs. Despite their small size, they have big personalities and were originally bred to catch rats.',
-        size: 'Tiny',
-        temperament: 'Feisty & Affectionate',
-        energy: 'Moderate'
-    },
-    'Boxer': {
-        traits: {
-            size: ['large'],
-            build: ['muscular', 'athletic'],
-            coat: ['short'],
-            color: ['golden', 'multi'],
-            muzzle: ['square', 'flat'],
-            ears: ['floppy', 'small'],
-            energy: ['high', 'very_high'],
-            exercise: ['high'],
-            vocal: ['moderate'],
-            social: ['friendly', 'protective'],
-            family_friendly: ['excellent'],
-            trainability: ['high'],
-            prey_drive: ['moderate'],
-            behavior: ['guarding', 'companion'],
-            affection: ['very_high']
-        },
-        description: 'Boxers are fun-loving, bright, and active. They remain playful well into adulthood and are known for their patience with children and loyalty to family.',
-        size: 'Large',
-        temperament: 'Playful & Loyal',
-        energy: 'High'
-    },
-    'Shih Tzu': {
-        traits: {
-            size: ['small'],
-            build: ['stocky'],
-            coat: ['long'],
-            color: ['multi', 'golden', 'light'],
-            muzzle: ['flat'],
-            ears: ['floppy'],
-            energy: ['low', 'moderate'],
-            exercise: ['minimal'],
-            vocal: ['quiet', 'moderate'],
-            social: ['friendly'],
-            family_friendly: ['excellent'],
-            trainability: ['moderate'],
-            prey_drive: ['low'],
-            behavior: ['companion'],
-            affection: ['very_high']
-        },
-        description: 'Shih Tzus are affectionate, outgoing, and bred to be companion dogs. They love being with people and are happy, lively little dogs that thrive on human companionship.',
-        size: 'Small',
-        temperament: 'Affectionate & Outgoing',
-        energy: 'Low'
-    },
-    'Australian Shepherd': {
-        traits: {
-            size: ['medium', 'large'],
-            build: ['athletic'],
-            coat: ['medium', 'long'],
-            color: ['multi', 'dark'],
-            muzzle: ['medium'],
-            ears: ['semi'],
-            energy: ['very_high'],
-            exercise: ['very_high'],
-            vocal: ['moderate', 'frequent'],
             social: ['cautious', 'friendly'],
-            family_friendly: ['excellent', 'good'],
-            trainability: ['high'],
-            prey_drive: ['high'],
-            behavior: ['herding'],
-            affection: ['high']
-        },
-        description: 'Australian Shepherds are smart, work-oriented, and exuberant. They are highly versatile, excel at herding, and need lots of physical and mental exercise.',
-        size: 'Medium',
-        temperament: 'Smart & Energetic',
-        energy: 'Very High'
-    },
-    'Cocker Spaniel': {
-        traits: {
-            size: ['medium', 'small'],
-            build: ['stocky', 'muscular'],
-            coat: ['long', 'medium'],
-            color: ['golden', 'dark', 'multi'],
-            muzzle: ['medium'],
-            ears: ['floppy'],
-            energy: ['moderate', 'high'],
-            exercise: ['moderate'],
-            vocal: ['moderate'],
-            social: ['friendly'],
-            family_friendly: ['excellent'],
-            trainability: ['high'],
-            prey_drive: ['moderate'],
-            behavior: ['hunting', 'companion'],
-            affection: ['very_high']
-        },
-        description: 'Cocker Spaniels are gentle, smart, and happy. They are sporting dogs with beautiful, silky coats and sweet, affectionate dispositions.',
-
-        size: 'Medium',
-        temperament: 'Gentle & Happy',
-        energy: 'Moderate'
-    },
-    'Great Dane': {
-        traits: {
-            size: ['giant'],
-            build: ['athletic', 'muscular'],
-            coat: ['short'],
-            color: ['dark', 'multi', 'golden'],
-            muzzle: ['long', 'square'],
-            ears: ['floppy', 'semi'],
-            energy: ['moderate'],
-            exercise: ['moderate'],
-            vocal: ['quiet', 'moderate'],
-            social: ['friendly', 'cautious'],
-            family_friendly: ['excellent', 'good'],
-            trainability: ['high'],
-            prey_drive: ['low'],
-            behavior: ['companion', 'guarding'],
+            family_friendly: ['okay', 'good'],
+            trainability: ['moderate'],
+            prey_drive: ['high', 'moderate'],
+            behavior: ['hunting'],
             affection: ['high', 'very_high']
         },
-        description: 'Great Danes are gentle giants, known for their patience and friendliness. Despite their imposing size, they are affectionate and make excellent family companions.',
-        size: 'Giant',
-        temperament: 'Gentle & Friendly',
+        description: 'Dachshunds are clever, lively, and devoted little dogs with a huge personality. Their long body and stubby legs were designed for digging into badger burrows.',
+        size: 'Small',
+        temperament: 'Clever & Lively',
         energy: 'Moderate'
     },
+
     'Rottweiler': {
         traits: {
             size: ['large', 'giant'],
             build: ['muscular', 'stocky'],
             coat: ['short'],
             color: ['dark', 'multi'],
-            muzzle: ['medium', 'square'],
-            ears: ['floppy', 'small'],
+            muzzle: ['square', 'medium'],
+            ears: ['small', 'floppy'],
             energy: ['moderate', 'high'],
-            exercise: ['moderate', 'high'],
+            exercise: ['high', 'moderate'],
             vocal: ['moderate', 'quiet'],
-            social: ['protective', 'reserved'],
-            family_friendly: ['good', 'excellent'],
+            social: ['reserved', 'protective'],
+            family_friendly: ['good'],
             trainability: ['high'],
             prey_drive: ['moderate'],
             behavior: ['guarding'],
             affection: ['high', 'moderate']
         },
-        description: 'Rottweilers are loyal, loving, and confident guardians. They are calm, courageous, and have a strong desire to protect their family.',
+        description: 'Rottweilers are powerful, loyal, and confident. They are natural guard dogs who are deeply devoted to their families. With proper training they are calm and loving companions.',
         size: 'Large',
         temperament: 'Loyal & Confident',
         energy: 'Moderate'
     },
-    'Pembroke Welsh Corgi': {
+
+    'Shih Tzu': {
+        traits: {
+            size: ['small'],
+            build: ['stocky'],
+            coat: ['long'],
+            color: ['multi', 'light', 'golden', 'dark'],
+            muzzle: ['flat'],
+            ears: ['floppy'],
+            energy: ['low', 'moderate'],
+            exercise: ['minimal', 'moderate'],
+            vocal: ['moderate'],
+            social: ['friendly'],
+            family_friendly: ['excellent', 'good'],
+            trainability: ['moderate'],
+            prey_drive: ['low'],
+            behavior: ['companion'],
+            affection: ['very_high', 'high']
+        },
+        description: 'Shih Tzus were bred to be companions and that is exactly what they are. They are affectionate, outgoing little dogs who thrive on human company and do not need much space.',
+        size: 'Small',
+        temperament: 'Affectionate & Outgoing',
+        energy: 'Low'
+    },
+
+    'Boxer': {
+        traits: {
+            size: ['large', 'medium'],
+            build: ['muscular'],
+            coat: ['short'],
+            color: ['golden', 'multi'],
+            muzzle: ['flat', 'square'],
+            ears: ['small', 'floppy'],
+            energy: ['high', 'very_high'],
+            exercise: ['high', 'very_high'],
+            vocal: ['moderate'],
+            social: ['friendly', 'cautious'],
+            family_friendly: ['excellent'],
+            trainability: ['moderate', 'high'],
+            prey_drive: ['moderate'],
+            behavior: ['guarding', 'companion'],
+            affection: ['very_high', 'high']
+        },
+        description: 'Boxers are playful, energetic, and deeply loyal. They are known for their puppy-like enthusiasm well into adulthood and their strong bond with family members.',
+        size: 'Large',
+        temperament: 'Playful & Loyal',
+        energy: 'High'
+    },
+
+    'Australian Shepherd': {
+        traits: {
+            size: ['medium'],
+            build: ['athletic', 'muscular'],
+            coat: ['medium', 'long'],
+            color: ['multi'],
+            muzzle: ['medium'],
+            ears: ['semi', 'floppy'],
+            energy: ['very_high', 'high'],
+            exercise: ['very_high', 'high'],
+            vocal: ['moderate', 'frequent'],
+            social: ['cautious', 'friendly'],
+            family_friendly: ['good', 'excellent'],
+            trainability: ['high'],
+            prey_drive: ['high', 'moderate'],
+            behavior: ['herding'],
+            affection: ['high', 'very_high']
+        },
+        description: 'Australian Shepherds are brilliant, work-oriented, and incredibly agile. Despite their name they were developed in the US. They need a job to do or they will invent their own.',
+        size: 'Medium',
+        temperament: 'Brilliant & Energetic',
+        energy: 'Very High'
+    },
+
+    'Doberman': {
+        traits: {
+            size: ['large'],
+            build: ['athletic', 'muscular'],
+            coat: ['short'],
+            color: ['dark', 'multi'],
+            muzzle: ['long'],
+            ears: ['pointed'],
+            energy: ['high', 'very_high'],
+            exercise: ['high', 'very_high'],
+            vocal: ['moderate', 'quiet'],
+            social: ['reserved', 'protective'],
+            family_friendly: ['good'],
+            trainability: ['high'],
+            prey_drive: ['moderate', 'high'],
+            behavior: ['guarding'],
+            affection: ['high', 'moderate']
+        },
+        description: 'Dobermans are sleek, powerful, and highly intelligent. They are one of the best guard dogs in the world and are extremely loyal to their owners. Very trainable with the right handler.',
+        size: 'Large',
+        temperament: 'Alert & Loyal',
+        energy: 'High'
+    },
+
+    'Corgi': {
         traits: {
             size: ['small', 'medium'],
-            build: ['long_low'],
+            build: ['long_low', 'stocky'],
             coat: ['medium'],
             color: ['golden', 'multi'],
             muzzle: ['medium'],
@@ -559,18 +503,19 @@ const breeds = {
             energy: ['high', 'moderate'],
             exercise: ['moderate', 'high'],
             vocal: ['frequent', 'moderate'],
-            social: ['friendly'],
-            family_friendly: ['excellent'],
+            social: ['friendly', 'cautious'],
+            family_friendly: ['good', 'excellent'],
             trainability: ['high'],
             prey_drive: ['moderate'],
             behavior: ['herding'],
             affection: ['high']
         },
-        description: 'Corgis are smart, affectionate, and alert. Despite their short legs, they are athletic herding dogs with a big-dog bark and lots of personality.',
+        description: 'Corgis are smart, affectionate, and alert. Despite their short legs they are athletic herding dogs with a big-dog bark and loads of personality.',
         size: 'Small-Medium',
         temperament: 'Smart & Affectionate',
         energy: 'High'
     },
+
     'Pomeranian': {
         traits: {
             size: ['small'],
@@ -589,11 +534,12 @@ const breeds = {
             behavior: ['companion'],
             affection: ['high', 'very_high']
         },
-        description: 'Pomeranians are inquisitive, bold, and lively. They have a fluffy coat and fox-like face, and despite their small size, they think they are much larger dogs.',
+        description: 'Pomeranians are bold, inquisitive, and lively little dogs. They have a thick fluffy coat and a fox-like face, and despite their small size they absolutely do not know it.',
         size: 'Tiny',
         temperament: 'Bold & Lively',
         energy: 'Moderate'
     },
+
     'Bernese Mountain Dog': {
         traits: {
             size: ['giant', 'large'],
@@ -612,145 +558,134 @@ const breeds = {
             behavior: ['companion'],
             affection: ['very_high']
         },
-        description: 'Bernese Mountain Dogs are gentle, calm, and affectionate. They are large, sturdy dogs with striking tri-colored coats and a sweet, patient nature.',
+        description: 'Bernese Mountain Dogs are gentle, calm, and deeply affectionate. They are large sturdy dogs with striking tri-colored coats and the sweetest, most patient nature you will find.',
         size: 'Giant',
         temperament: 'Gentle & Calm',
         energy: 'Moderate'
     }
 };
 
+
 function startQuiz() {
     dogName = document.getElementById('dog-name').value.trim();
     if (!dogName) {
-        alert('Please enter your dog\'s name!');
+        alert("Please enter your dog's name first!");
         return;
     }
 
     document.getElementById('landing-page').classList.add('hidden');
     document.getElementById('quiz-page').classList.remove('hidden');
-
-    displayQuestion();
+    showQuestion();
 }
 
-function displayQuestion() {
-    const question = questions[currentQuestion];
-    const container = document.getElementById('question-container');
+function showQuestion() {
+    var q = questions[currentQ];
+    var container = document.getElementById('question-container');
 
-    const progress = ((currentQuestion + 1) / questions.length) * 100;
-    document.getElementById('progress-fill').style.width = progress + '%';
-    document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+    var pct = ((currentQ + 1) / questions.length) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = 'Question ' + (currentQ + 1) + ' of ' + questions.length;
 
-    container.innerHTML = `
-        <div class="question">
-            <h3 class="question-title">${question.question}</h3>
-            <div class="options">
-                ${question.options.map((option, index) => `
-                    <div class="option" onclick="selectOption(${index})">
-                        <div class="option-text">${option.text}</div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
+    var optionsHTML = '';
+    for (var i = 0; i < q.options.length; i++) {
+        optionsHTML += '<div class="option" data-index="' + i + '"><div class="option-text">' + q.options[i].text + '</div></div>';
+    }
+
+    container.innerHTML = '<div class="question"><h3 class="question-title">' + q.question + '</h3><div class="options">' + optionsHTML + '</div></div>';
 
     document.getElementById('next-btn').disabled = true;
+
+    var opts = container.querySelectorAll('.option');
+    opts.forEach(function(el) {
+        el.addEventListener('click', function() {
+            pickOption(parseInt(el.getAttribute('data-index')));
+        });
+    });
 }
 
-function selectOption(index) {
-    const question = questions[currentQuestion];
-    const options = document.querySelectorAll('.option');
+function pickOption(idx) {
+    var q = questions[currentQ];
+    var opts = document.querySelectorAll('.option');
 
-    options.forEach(opt => opt.classList.remove('selected'));
-    options[index].classList.add('selected');
+    opts.forEach(function(o) { o.classList.remove('selected'); });
+    opts[idx].classList.add('selected');
 
-    answers[question.id] = question.options[index];
+    answers[q.id] = q.options[idx];
     document.getElementById('next-btn').disabled = false;
 }
 
 function nextQuestion() {
-    currentQuestion++;
-
-    if (currentQuestion < questions.length) {
-        displayQuestion();
+    currentQ++;
+    if (currentQ < questions.length) {
+        showQuestion();
     } else {
-        calculateResults();
+        getResults();
     }
 }
 
-function calculateResults() {
-    const scores = {};
+function getResults() {
+    var scores = {};
 
-    for (const [breedName, breedData] of Object.entries(breeds)) {
-        let score = 0;
-        let maxScore = 0;
+    for (var breedName in breeds) {
+        var breedData = breeds[breedName];
+        var score = 0;
+        var total = 0;
 
-        for (const [questionId, answer] of Object.entries(answers)) {
-            const traitType = Object.keys(answer.traits)[0];
-            const traitValue = answer.traits[traitType];
+        for (var qId in answers) {
+            var ans = answers[qId];
+            var traitKey = Object.keys(ans.traits)[0];
+            var traitVal = ans.traits[traitKey];
+            total++;
 
-            maxScore += 1;
-
-            if (breedData.traits[traitType] && breedData.traits[traitType].includes(traitValue)) {
-                score += 1;
+            if (breedData.traits[traitKey] && breedData.traits[traitKey].indexOf(traitVal) !== -1) {
+                score++;
             }
         }
 
-        scores[breedName] = (score / maxScore) * 100;
+        scores[breedName] = (score / total) * 100;
     }
 
-    const sortedBreeds = Object.entries(scores)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 3);
-
-    displayResults(sortedBreeds);
+    var sorted = Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; }).slice(0, 3);
+    showResults(sorted);
 }
 
-function displayResults(sortedBreeds) {
+function showResults(sorted) {
     document.getElementById('quiz-page').classList.add('hidden');
     document.getElementById('results-page').classList.remove('hidden');
 
-    const [topBreed, ...alternatives] = sortedBreeds;
-    const [breedName, confidence] = topBreed;
-    const breedData = breeds[breedName];
+    var top = sorted[0];
+    var breedName = top[0];
+    var confidence = top[1];
+    var breedData = breeds[breedName];
 
     document.getElementById('dog-name-result').textContent = dogName;
     document.getElementById('breed-result').textContent = breedName;
-    document.getElementById('confidence-result').textContent = `${Math.round(confidence)}% Match`;
+    document.getElementById('confidence-result').textContent = Math.round(confidence) + '% Match';
+    document.getElementById('breed-description').textContent = breedData.description;
 
-    document.getElementById('breed-description').innerHTML = `
-        ${breedData.description}
-    `;
+    document.getElementById('breed-traits').innerHTML =
+        '<div class="traits"><div class="traits-label">Size</div><div class="traits-value">' + breedData.size + '</div></div>' +
+        '<div class="traits"><div class="traits-label">Temperament</div><div class="traits-value">' + breedData.temperament + '</div></div>' +
+        '<div class="traits"><div class="traits-label">Energy</div><div class="traits-value">' + breedData.energy + '</div></div>';
 
-    document.getElementById('breed-traits').innerHTML = `
-        <div class="traits">
-            <div class="trait-label">Size</div>
-            <div class="trait-value">${breedData.size}</div>
-        </div>
-        <div class="trait">
-            <div class="trait-label">Temperament</div>
-            <div class="trait-value">${breedData.temperament}</div>
-        </div>
-        <div class="trait">
-
-            <div class="trait-label">Energy</div>
-            <div class="trait-value">${breedData.energy}</div>
-        </div>
-            `;
-
-    document.getElementById('alternatives-container').innerHTML = alternatives.map(([name, score]) => `
-        <div class="alt-breed">
-            <span class="alt-breed-name">${name}</span>
-                <span class="alt-confidence">${Math.round(score)}% match</span>
-        </div>
-    `).join('');
+    var altHTML = '';
+    for (var i = 1; i < sorted.length; i++) {
+        altHTML += '<div class="alt-breed"><span class="alt-breed-name">' + sorted[i][0] + '</span><span class="alt-confindence">' + Math.round(sorted[i][1]) + '% match</span></div>';
+    }
+    document.getElementById('alternatives-container').innerHTML = altHTML;
 }
 
 function restartQuiz() {
-    currentQuestion = 0;
+    currentQ = 0;
     answers = {};
     dogName = '';
-
     document.getElementById('results-page').classList.add('hidden');
     document.getElementById('landing-page').classList.remove('hidden');
     document.getElementById('dog-name').value = '';
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('start-btn').addEventListener('click', startQuiz);
+    document.getElementById('next-btn').addEventListener('click', nextQuestion);
+    document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+});
